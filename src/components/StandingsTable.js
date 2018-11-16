@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classes from './StandingsTable.module.css';
 
 class StandingsTable extends Component {
   state = {
@@ -51,7 +52,7 @@ class StandingsTable extends Component {
 
   render() {
     return (
-      <table>
+      <table className={classes.StandingsTable}>
         <thead>
           <tr>
             <th>Rank</th>
