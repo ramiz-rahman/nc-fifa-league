@@ -1,0 +1,48 @@
+.Match {
+  box-sizing: border-box;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 90%;
+  min-width: 260px;
+  max-width: 1080px;
+  margin: auto;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+}
+
+.Match div {
+  flex: 2;
+}
+.Match .Player img {
+  width: 24px;
+  padding-right: 10px;
+}
+
+.Match .Player {
+  display: flex;
+  align-items: center;
+}
+
+.Match div div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 160px;
+  border-right: 2px solid #ddd;
+}
+
+.Match p {
+  padding: 0;
+  margin: 8px;
+  line-height: 1.3;
+}
+
+.Match .Time {
+  flex: 1;
+  font-size: 0.8rem;
+  min-width: 100px;
+  text-align: center;
+}

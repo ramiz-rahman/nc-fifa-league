@@ -1,0 +1,27 @@
+.PlayerStatsTable {
+  box-sizing: border-box;
+  min-width: 220px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.PlayerStatsTable ul {
+  margin: 0 auto;
+  padding: 10px 5px 10px 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.PlayerStatsTable ul li {
+  list-style: none;
+  flex-basis: 100px;
+  flex-grow: -1;
+}
+
+@media (max-width: 420px) {
+  .PlayerStatsTable {
+    width: 200px;
+  }
+}
