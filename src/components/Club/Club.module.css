@@ -1,0 +1,11 @@
+.Club {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Club img {
+  width: 24px;
+  height: 24px;
+  padding-right: 10px;
+}

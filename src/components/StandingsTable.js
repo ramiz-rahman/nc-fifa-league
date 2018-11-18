@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import classes from './StandingsTable.module.css';
+import man_utd from '../assets/logo/man_utd.png';
+
+import Club from './Club/Club';
 
 class StandingsTable extends Component {
   state = {
@@ -7,76 +10,104 @@ class StandingsTable extends Component {
       {
         name: 'Ramiz',
         club: 'Real Madrid',
-        mp: 12,
-        w: 10,
-        d: 2,
-        l: 0,
-        pts: 32,
-        gf: 36,
-        ga: 5,
-        gd: 31
+        stats: {
+          mp: 12,
+          w: 10,
+          d: 2,
+          l: 0,
+          pts: 32,
+          gf: 36,
+          ga: 5,
+          gd: 31
+        }
       },
       {
         name: 'Zulfikar',
         club: 'Manchester United',
-        mp: 12,
-        w: 6,
-        d: 2,
-        l: 4,
-        pts: 20,
-        gf: 36,
-        ga: 5,
-        gd: 31
+        stats: {
+          mp: 12,
+          w: 6,
+          d: 2,
+          l: 4,
+          pts: 20,
+          gf: 36,
+          ga: 5,
+          gd: 31
+        }
       },
       {
         name: 'Sabit',
         club: 'PSG',
-        mp: 12,
-        w: 6,
-        d: 2,
-        l: 4,
-        pts: 20,
-        gf: 36,
-        ga: 5,
-        gd: 31
+        stats: {
+          mp: 12,
+          w: 6,
+          d: 2,
+          l: 4,
+          pts: 20,
+          gf: 36,
+          ga: 5,
+          gd: 31
+        }
       }
     ]
   };
 
-  asTableCells(player) {
-    const playerData = Object.keys(player).map(key => (
-      <td key={key.toString()}>{player[key]}</td>
+  asTableCells(stats) {
+    const statsData = Object.keys(stats).map(key => (
+      <td key={key.toString()}>{stats[key]}</td>
     ));
-    return playerData;
+    return statsData;
   }
 
   render() {
     return (
-      <table className={classes.StandingsTable}>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Club</th>
-            <th>MP</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
-            <th>Pts</th>
-            <th>GF</th>
-            <th>GA</th>
-            <th>GD</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.players.map((player, i) => (
-            <tr key={i}>
-              <td key="rank">{i}</td>
-              {this.asTableCells(player)}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={classes.StandingsTable}>
+        <div className={classes.Fixed}>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Player</th>
+                <th scope="col" className={classes.hidden}>
+                  Club
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.players.map((player, i) => (
+                <tr key={player.name}>
+                  <td>{i}</td>
+                  <td>{player.name}</td>
+                  <td className={classes.hidden}>
+                    <Club name={player.club} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class={classes.Scrollable}>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">MP</th>
+                <th scope="col">W</th>
+                <th scope="col">D</th>
+                <th scope="col">L</th>
+                <th scope="col">Pts</th>
+                <th scope="col">GF</th>
+                <th scope="col">GA</th>
+                <th scope="col">GD</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.players.map((player, i) => (
+                <tr key={i}>{this.asTableCells(player.stats)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 }

@@ -1,22 +1,74 @@
 .StandingsTable {
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 1080px;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: scroll;
+}
+
+.StandingsTable div {
+  flex: 1;
+}
+
+.StandingsTable table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: center;
+  width: inherit;
+  min-width: 100px;
 }
 
 .StandingsTable tr {
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #ddd;
 }
 
-.StandingsTable tr:last-of-type {
+.StandingsTable tbody tr:last-of-type {
   border: none;
 }
 
-.StandingsTable th {
-  background-color: red;
-  border: 2px solid #333;
+.StandingsTable th,
+.StandingsTable td {
+  box-sizing: border-box;
+  padding: 20px;
+  vertical-align: middle;
+  height: 80px;
 }
 
-.StandingsTable td,
 .StandingsTable th {
-  padding: 20px;
+  font-weight: 700;
+}
+
+.Fixed th:nth-child(1) {
+  width: 15%;
+}
+
+.Fixed th:nth-child(2) {
+  width: 25%;
+}
+
+.Scrollable {
+  overflow: scroll;
+}
+
+@media (max-width: 767px) {
+  .Fixed {
+    max-width: 200px;
+    border-right: 3px solid #eee;
+  }
+  .hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1080px) {
+  .Fixed table {
+    width: 500px;
+  }
 }

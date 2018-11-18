@@ -6,6 +6,7 @@ import StandingsTable from './components/StandingsTable';
 import Player from './components/Player';
 import PlayerStatsTable from './components/PlayerStatsTable/PlayerStatsTable';
 import Match from './components/Match/Match';
+import Club from './components/Club/Club';
 
 class App extends Component {
   render() {
@@ -22,6 +23,8 @@ class App extends Component {
           ga="5"
           gd="31"
         />
+
+        <StandingsTable />
 
         <Match />
         <Match />
