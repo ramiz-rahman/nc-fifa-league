@@ -86,7 +86,7 @@ class StandingsTable extends Component {
             </tbody>
           </table>
         </div>
-        <div class={classes.Scrollable}>
+        <div className={classes.Scrollable}>
           <table>
             <thead>
               <tr>

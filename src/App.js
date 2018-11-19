@@ -8,10 +8,43 @@ import PlayerStatsTable from './components/PlayerStatsTable/PlayerStatsTable';
 import Match from './components/Match/Match';
 import Club from './components/Club/Club';
 
+import fire from './fire';
+import PlayerRegisterForm from './components/PlayerRegisterForm/PlayerRegisterForm';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { players: [] }; // <- set up react state
+  }
+
+  componentWillMount() {
+    let db = fire.database();
+    let player = db.ref('Players/');
+    player.on('value', snapshot => {
+      this.setState({ players: snapshot.val() });
+    });
+    console.log(this.state.players);
+    console.log(typeof this.state.players);
+  }
+
+  registerPlayer(event) {
+    event.preventDefault();
+    let player = new FormData(event.target);
+    let db = fire.database();
+    db.ref('players').push({
+      name: player.get('playerName'),
+      club: player.get('club')
+    });
+  }
+
   render() {
     return (
       <div>
+        <form onSubmit={this.registerPlayer.bind(this)}>
+          <input type="text" name="playerName" />
+          <input type="text" name="club" />
+          <input type="submit" />
+        </form>
         <Player />
         <PlayerStatsTable
           mp="12"
@@ -23,6 +56,8 @@ class App extends Component {
           ga="5"
           gd="31"
         />
+
+        <PlayerRegisterForm />
 
         <StandingsTable />
 

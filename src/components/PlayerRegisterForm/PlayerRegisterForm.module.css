@@ -1,0 +1,29 @@
+.PlayerRegisterForm {
+}
+
+.PlayerRegisterForm p {
+  margin: auto;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+.PlayerRegisterForm input,
+.PlayerRegisterForm select,
+.PlayerRegisterForm input[type='submit'] {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background: white;
+  height: 80px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.PlayerRegisterForm input[type='submit'] {
+  font-weight: 700;
+}
