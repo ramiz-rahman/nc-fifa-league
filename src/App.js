@@ -10,6 +10,7 @@ import Club from './components/Club/Club';
 
 import fire from './fire';
 import PlayerRegisterForm from './components/PlayerRegisterForm/PlayerRegisterForm';
+import AddMatchForm from './components/AddMatchForm/AddMatchForm';
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +46,6 @@ class App extends Component {
           <input type="text" name="club" />
           <input type="submit" />
         </form>
-        <Player />
         <PlayerStatsTable
           mp="12"
           w="10"
@@ -59,6 +59,7 @@ class App extends Component {
 
         <PlayerRegisterForm />
 
+        <AddMatchForm />
         <StandingsTable />
 
         <Match />

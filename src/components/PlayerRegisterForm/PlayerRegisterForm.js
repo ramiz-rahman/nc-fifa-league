@@ -30,6 +30,14 @@ class PlayerRegisterForm extends Component {
     message: null
   };
 
+  _getSelectedClubs = players => {
+    let clubs = [];
+    if (players) {
+      Object.keys(players).map(player => clubs.push(players[player].club));
+    }
+    return clubs;
+  };
+
   componentDidMount() {
     const root = fire.database().ref();
     const playersRef = root.child('players');
@@ -38,12 +46,7 @@ class PlayerRegisterForm extends Component {
       let players = snapshot.val();
 
       // Collect selected clubs
-      let selectedClubs = [];
-      if (players) {
-        Object.keys(players).map(player =>
-          selectedClubs.push(players[player].club)
-        );
-      }
+      const selectedClubs = this._getSelectedClubs(players);
 
       this.setState(oldState => {
         return {
@@ -54,7 +57,6 @@ class PlayerRegisterForm extends Component {
   }
 
   registerPlayer = e => {
-    e.preventDefault();
     const player = new FormData(e.target);
     fire
       .database()

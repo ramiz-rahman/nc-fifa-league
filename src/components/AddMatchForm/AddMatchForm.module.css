@@ -1,4 +1,4 @@
-.PlayerRegisterForm p {
+.AddMatchForm p {
   margin: auto;
   max-width: 700px;
   display: flex;
@@ -7,9 +7,9 @@
   flex-flow: row wrap;
 }
 
-.PlayerRegisterForm input,
-.PlayerRegisterForm select,
-.PlayerRegisterForm input[type='submit'] {
+.AddMatchForm input,
+.AddMatchForm select,
+.AddMatchForm input[type='submit'] {
   box-sizing: border-box;
   margin: 0;
   padding: 20px;
@@ -21,6 +21,6 @@
   font-size: 1rem;
 }
 
-.PlayerRegisterForm input[type='submit'] {
+.AddMatchForm input[type='submit'] {
   font-weight: 700;
 }
