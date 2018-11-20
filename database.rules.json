@@ -11,7 +11,7 @@
 
     "matches": {
       "$id": {
-        ".validate": "newData.hasChildren(['homePlayerName', 'awayPlayerName', 'homePlayerScore', 'awayPlayerScore']) && newData.child('homePlayerName').isString() && newData.child('awayPlayerName').isString() && newData.child('homePlayerScore').isNumber() && newData.child('homePlayerScore').isNumber()"
+        ".validate": "newData.hasChildren(['homePlayerName', 'awayPlayerName', 'homePlayerScore', 'awayPlayerScore', 'datetime']) && newData.child('homePlayerName').isString() && newData.child('awayPlayerName').isString() && newData.child('homePlayerScore').isNumber() && newData.child('homePlayerScore').isNumber() && newData.child('datetime').isNumber()"
       }
     }
   }

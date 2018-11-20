@@ -53,11 +53,11 @@ class AddMatchForm extends Component {
       homePlayerName: matchData.get('homePlayerName'),
       awayPlayerName: matchData.get('awayPlayerName'),
       homePlayerScore: parseInt(matchData.get('homePlayerScore')),
-      awayPlayerScore: parseInt(matchData.get('awayPlayerScore'))
+      awayPlayerScore: parseInt(matchData.get('awayPlayerScore')),
+      datetime: Date.now()
     });
 
     // Update Home Player
-
     const homePlayerRef = root
       .child('players')
       .orderByChild('name')
