@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import StandingsTable from './components/StandingsTable';
-import Player from './components/Player';
+import StandingsTable from './components/StandingsTable/StandingsTable';
+import Player from './components/Player/Player';
 import PlayerStatsTable from './components/PlayerStatsTable/PlayerStatsTable';
 import Match from './components/Match/Match';
 import Club from './components/Club/Club';
@@ -11,12 +11,13 @@ import Club from './components/Club/Club';
 import fire from './fire';
 import PlayerRegisterForm from './components/PlayerRegisterForm/PlayerRegisterForm';
 import AddMatchForm from './components/AddMatchForm/AddMatchForm';
+import Toolbar from './components/Navigation/Toolbar/Toolbar';
+import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { players: [] }; // <- set up react state
-  }
+  state = {
+    showSideDrawer: false
+  };
 
   componentWillMount() {
     let db = fire.database();
@@ -38,34 +39,24 @@ class App extends Component {
     });
   }
 
+  sideDrawerToggleHandler = () => {
+    this.setState(oldState => {
+      return { showSideDrawer: !oldState.showSideDrawer };
+    });
+  };
+
+  sideDrawerCloseHandler = () => {
+    this.setState({ showSideDrawer: false });
+  };
+
   render() {
     return (
       <div>
-        <form onSubmit={this.registerPlayer.bind(this)}>
-          <input type="text" name="playerName" />
-          <input type="text" name="club" />
-          <input type="submit" />
-        </form>
-        <PlayerStatsTable
-          mp="12"
-          w="10"
-          d="2"
-          l="0"
-          pts="32"
-          gf="36"
-          ga="5"
-          gd="31"
+        <Toolbar toggleSideDrawer={this.sideDrawerToggleHandler} />
+        <SideDrawer
+          opened={this.state.showSideDrawer}
+          closeSideDrawer={this.sideDrawerCloseHandler}
         />
-
-        <PlayerRegisterForm />
-
-        <AddMatchForm />
-        <StandingsTable />
-
-        <Match />
-        <Match />
-        <Match />
-        <Match />
       </div>
     );
   }

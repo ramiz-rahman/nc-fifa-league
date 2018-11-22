@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classes from './StandingsTable.module.css';
-import man_utd from '../assets/logo/man_utd.png';
 
-import Club from './Club/Club';
+import Club from '../Club/Club';
 
 class StandingsTable extends Component {
   state = {

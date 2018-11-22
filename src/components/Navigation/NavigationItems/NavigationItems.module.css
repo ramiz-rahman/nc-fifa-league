@@ -1,0 +1,23 @@
+.NavigationItems {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.NavigationItems li {
+  padding: 10px;
+}
+
+.NavigationItems li a {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.NavigationItems li a:visited {
+  color: #333;
+}
+
+.NavigationItems li a:hover {
+  color: red;
+}

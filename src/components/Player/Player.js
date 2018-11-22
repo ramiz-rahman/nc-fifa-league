@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Player.module.css';
-import thumbnail from '../assets/ramiz-thumbnail.jpg';
+import thumbnail from '../../assets/ramiz-thumbnail.jpg';
 
 class Player extends Component {
   state = {
