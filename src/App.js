@@ -57,6 +57,9 @@ class App extends Component {
           opened={this.state.showSideDrawer}
           closeSideDrawer={this.sideDrawerCloseHandler}
         />
+        <div style={{ padding: '20px' }}>
+          <StandingsTable />
+        </div>
       </div>
     );
   }

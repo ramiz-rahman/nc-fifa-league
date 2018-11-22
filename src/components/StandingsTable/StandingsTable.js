@@ -3,59 +3,43 @@ import classes from './StandingsTable.module.css';
 
 import Club from '../Club/Club';
 
+import fire from '../../fire';
+
 class StandingsTable extends Component {
   state = {
-    players: [
-      {
-        name: 'Ramiz',
-        club: 'Real Madrid',
-        stats: {
-          mp: 12,
-          w: 10,
-          d: 2,
-          l: 0,
-          pts: 32,
-          gf: 36,
-          ga: 5,
-          gd: 31
-        }
-      },
-      {
-        name: 'Zulfikar',
-        club: 'Manchester United',
-        stats: {
-          mp: 12,
-          w: 6,
-          d: 2,
-          l: 4,
-          pts: 20,
-          gf: 36,
-          ga: 5,
-          gd: 31
-        }
-      },
-      {
-        name: 'Sabit',
-        club: 'PSG',
-        stats: {
-          mp: 12,
-          w: 6,
-          d: 2,
-          l: 4,
-          pts: 20,
-          gf: 36,
-          ga: 5,
-          gd: 31
-        }
-      }
-    ]
+    players: []
   };
 
-  asTableCells(stats) {
-    const statsData = Object.keys(stats).map(key => (
-      <td key={key.toString()}>{stats[key]}</td>
-    ));
-    return statsData;
+  _getPlayers(playersObject) {
+    let players = [];
+    if (playersObject) {
+      players = Object.keys(playersObject).map(
+        playerID => playersObject[playerID]
+      );
+    }
+    players.sort((p1, p2) => {
+      if (p1.pts > p2.pts) return -1;
+      else if (p1.pts < p2.pts) return 1;
+      else if (p1.gd > p2.gd) return -1;
+      else if (p1.gd < p2.gd) return 1;
+      else if (p1.gf > p2.gf) return -1;
+      else if (p1.gf < p2.gf) return 1;
+      else if (p1.ga > p2.ga) return -1;
+      else if (p1.ga < p2.ga) return 1;
+      else return 0;
+    });
+    return players;
+  }
+
+  componentDidMount() {
+    fire
+      .database()
+      .ref('players')
+      .on('value', snapshot => {
+        const playersObject = snapshot.val();
+        const players = this._getPlayers(playersObject);
+        this.setState({ players: players });
+      });
   }
 
   render() {
@@ -75,7 +59,7 @@ class StandingsTable extends Component {
             <tbody>
               {this.state.players.map((player, i) => (
                 <tr key={player.name}>
-                  <td>{i}</td>
+                  <td>{i + 1}</td>
                   <td>{player.name}</td>
                   <td className={classes.hidden}>
                     <Club name={player.club} />
@@ -101,7 +85,16 @@ class StandingsTable extends Component {
             </thead>
             <tbody>
               {this.state.players.map((player, i) => (
-                <tr key={i}>{this.asTableCells(player.stats)}</tr>
+                <tr key={i}>
+                  <td>{player.mp}</td>
+                  <td>{player.w}</td>
+                  <td>{player.d}</td>
+                  <td>{player.l}</td>
+                  <td>{player.pts}</td>
+                  <td>{player.gf}</td>
+                  <td>{player.ga}</td>
+                  <td>{player.gd}</td>
+                </tr>
               ))}
             </tbody>
           </table>
