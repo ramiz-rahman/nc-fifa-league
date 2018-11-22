@@ -1,53 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classes from './Match.module.css';
+import clubLogo from '../../assets/ClubLogoMap';
+import moment from 'moment';
 
-import manCity from '../../assets/logo/man_city.png';
-import manUtd from '../../assets/logo/man_utd.png';
-
-class Match extends Component {
-  state = {
-    homePlayer: {
-      name: 'Ramiz',
-      score: 3
-    },
-    awayPlayer: {
-      name: 'Pratik',
-      score: 1
-    },
-    matchNumber: 4,
-    date: '07/11/18'
-  };
-  render() {
-    return (
-      <div className={classes.Match}>
+const match = props => {
+  return (
+    <div className={classes.Match}>
+      <div>
         <div>
-          <div>
-            <p className={classes.Player}>
-              <img src={manCity} alt="Home Player's Team" />
-              {this.state.homePlayer.name}
-            </p>
-            <p>{this.state.homePlayer.score}</p>
-          </div>
-          <div>
-            <p className={classes.Player}>
-              <img src={manUtd} alt="Home Player's Team" />
-              {this.state.awayPlayer.name}
-            </p>
-            <p>{this.state.awayPlayer.score}</p>
-          </div>
+          <p className={classes.Player}>
+            <img
+              src={clubLogo[props.homePlayerClub]}
+              alt="Home Player's Team"
+            />
+            {props.homePlayerName}
+          </p>
+          <p>{props.homePlayerScore}</p>
         </div>
-
-        <div className={classes.Time}>
-          <p>
-            <strong>{this.state.matchNumber}</strong>
+        <div>
+          <p className={classes.Player}>
+            <img
+              src={clubLogo[props.awayPlayerClub]}
+              alt="Away Player's Team"
+            />
+            {props.awayPlayerName}
           </p>
-          <p>
-            <time>{this.state.date}</time>
-          </p>
+          <p>{props.awayPlayerScore}</p>
         </div>
       </div>
-    );
-  }
-}
 
-export default Match;
+      <div className={classes.Time}>
+        <p>
+          <strong>{props.number}</strong>
+        </p>
+        <p>
+          <time>{moment(props.datetime).calendar()}</time>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default match;

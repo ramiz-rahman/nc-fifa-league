@@ -16,17 +16,31 @@ import SideDrawer from './components/Navigation/SideDrawer/SideDrawer';
 
 class App extends Component {
   state = {
+    players: [],
+    matches: [],
     showSideDrawer: false
   };
 
   componentWillMount() {
-    let db = fire.database();
-    let player = db.ref('Players/');
-    player.on('value', snapshot => {
-      this.setState({ players: snapshot.val() });
+    const playersQuery = fire.database().ref('players');
+    playersQuery.on('value', snapshot => {
+      let players = Object.values(snapshot.val());
+      this.setState({ players: players });
     });
-    console.log(this.state.players);
-    console.log(typeof this.state.players);
+
+    const matchesQuery = fire
+      .database()
+      .ref('matches')
+      .orderByChild('datetime');
+    matchesQuery.on('value', snapshot => {
+      let matches = Object.values(snapshot.val());
+      matches.sort((m1, m2) => {
+        if (m1.datetime > m2.datetime) return -1;
+        else if (m1.datetime < m2.datetime) return 1;
+        else return 0;
+      });
+      this.setState({ matches: matches });
+    });
   }
 
   registerPlayer(event) {
@@ -57,8 +71,32 @@ class App extends Component {
           opened={this.state.showSideDrawer}
           closeSideDrawer={this.sideDrawerCloseHandler}
         />
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '10px 0' }}>
           <StandingsTable />
+
+          {this.state.matches.map((match, i) => (
+            <Match
+              key={i}
+              homePlayerName={match.homePlayerName}
+              homePlayerClub={
+                this.state.players.find(
+                  player => player.name === match.homePlayerName
+                ).club
+              }
+              awayPlayerName={match.awayPlayerName}
+              awayPlayerClub={
+                this.state.players.find(
+                  player => player.name === match.awayPlayerName
+                ).club
+              }
+              homePlayerScore={match.homePlayerScore}
+              awayPlayerScore={match.awayPlayerScore}
+              datetime={match.datetime}
+              number={this.state.matches.length - i}
+            />
+          ))}
+
+          <AddMatchForm />
         </div>
       </div>
     );
