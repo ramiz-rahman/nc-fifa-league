@@ -8,13 +8,13 @@ const navigationItems = props => {
         <a href="/">Standings</a>
       </li>
       <li>
-        <a href="/">Past Matches</a>
+        <a href="/past-matches">Past Matches</a>
       </li>
       <li>
-        <a href="/">Upcoming</a>
+        <a href="/upcoming">Upcoming</a>
       </li>
       <li>
-        <a href="/">Register</a>
+        <a href="/register">Register</a>
       </li>
     </ul>
   );
