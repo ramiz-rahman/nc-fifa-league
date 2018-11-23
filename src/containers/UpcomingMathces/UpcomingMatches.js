@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import fire from '../../fire';
 
 import Match from '../../components/Match/Match';
 
 class UpcomingMatches extends Component {
   state = {
     players: this.props.players,
-    matches: this.props.players,
+    matches: this.props.matches,
     upcoming: []
   };
 
@@ -49,27 +48,8 @@ class UpcomingMatches extends Component {
   };
 
   componentDidMount() {
-    const playersQuery = fire.database().ref('players');
-    playersQuery.on('value', snapshot => {
-      let players = Object.values(snapshot.val());
-      this.setState({ players: players });
-    });
-
-    const matchesQuery = fire
-      .database()
-      .ref('matches')
-      .orderByChild('datetime');
-    matchesQuery.on('value', snapshot => {
-      let matches = Object.values(snapshot.val());
-      matches.sort((m1, m2) => {
-        if (m1.datetime > m2.datetime) return -1;
-        else if (m1.datetime < m2.datetime) return 1;
-        else return 0;
-      });
-      this.setState({ matches: matches });
-      const upcomingMatches = this._generateMatches();
-      this.setState({ upcoming: upcomingMatches });
-    });
+    const upcomingMatches = this._generateMatches();
+    this.setState({ upcoming: upcomingMatches });
   }
 
   render() {

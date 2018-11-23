@@ -1,20 +1,29 @@
 import React from 'react';
 import classes from './NavigationItems.module.css';
+import { NavLink } from 'react-router-dom';
 
 const navigationItems = props => {
   return (
     <ul className={classes.NavigationItems}>
       <li>
-        <a href="/">Standings</a>
+        <NavLink to="/" exact>
+          Standings
+        </NavLink>
       </li>
       <li>
-        <a href="/past-matches">Past Matches</a>
+        <NavLink to="/past-matches" exact>
+          Past Matches
+        </NavLink>
       </li>
       <li>
-        <a href="/upcoming">Upcoming</a>
+        <NavLink to="/upcoming" exact>
+          Upcoming
+        </NavLink>
       </li>
       <li>
-        <a href="/register">Register</a>
+        <NavLink to="/register" exact>
+          Register
+        </NavLink>
       </li>
     </ul>
   );

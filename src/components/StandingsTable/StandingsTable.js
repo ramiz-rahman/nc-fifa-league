@@ -3,11 +3,9 @@ import classes from './StandingsTable.module.css';
 
 import Club from '../Club/Club';
 
-import fire from '../../fire';
-
 class StandingsTable extends Component {
   state = {
-    players: []
+    players: this.props.players
   };
 
   _getPlayers(playersObject) {
@@ -32,14 +30,23 @@ class StandingsTable extends Component {
   }
 
   componentDidMount() {
-    fire
-      .database()
-      .ref('players')
-      .on('value', snapshot => {
-        const playersObject = snapshot.val();
-        const players = this._getPlayers(playersObject);
-        this.setState({ players: players });
-      });
+    let players = this.state.players;
+    players.sort((p1, p2) => {
+      if (p1.pts > p2.pts) return -1;
+      else if (p1.pts < p2.pts) return 1;
+      else if (p1.gd > p2.gd) return -1;
+      else if (p1.gd < p2.gd) return 1;
+      else if (p1.gf > p2.gf) return -1;
+      else if (p1.gf < p2.gf) return 1;
+      else if (p1.ga > p2.ga) return -1;
+      else if (p1.ga < p2.ga) return 1;
+      else return 0;
+    });
+    this.setState({ players: players });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ players: nextProps.players });
   }
 
   render() {
