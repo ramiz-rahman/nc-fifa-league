@@ -25,36 +25,12 @@ class PlayerRegisterForm extends Component {
       'Real Madrid',
       'Sevilla',
       'Tottenham'
-    ],
-
-    message: null
+    ]
   };
 
   _getSelectedClubs = players => {
-    let clubs = [];
-    if (players) {
-      Object.keys(players).map(player => clubs.push(players[player].club));
-    }
-    return clubs;
+    return Object.values(players).map(player => player.club);
   };
-
-  componentDidMount() {
-    const root = fire.database().ref();
-    const playersRef = root.child('players');
-
-    playersRef.on('value', snapshot => {
-      let players = snapshot.val();
-
-      // Collect selected clubs
-      const selectedClubs = this._getSelectedClubs(players);
-
-      this.setState(oldState => {
-        return {
-          clubs: oldState.clubs.filter(club => !selectedClubs.includes(club))
-        };
-      });
-    });
-  }
 
   registerPlayer = e => {
     const player = new FormData(e.target);
@@ -73,9 +49,24 @@ class PlayerRegisterForm extends Component {
         ga: 0,
         gd: 0
       });
-
-    this.setState({ message: `${player.get('name')} has been registered` });
   };
+
+  componentDidMount() {
+    fire
+      .database()
+      .ref('players')
+      .on('value', snapshot => {
+        const players = snapshot.val();
+
+        const selectedClubs = this._getSelectedClubs(players);
+
+        this.setState(oldState => {
+          return {
+            clubs: oldState.clubs.filter(club => !selectedClubs.includes(club))
+          };
+        });
+      });
+  }
 
   render() {
     return (
@@ -83,7 +74,6 @@ class PlayerRegisterForm extends Component {
         className={classes.PlayerRegisterForm}
         onSubmit={this.registerPlayer}
       >
-        <p>{this.state.message}</p>
         <p>
           <input type="text" name="name" placeholder="Your Name" />
           <select name="club">

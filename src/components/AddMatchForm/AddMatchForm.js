@@ -29,13 +29,7 @@ class AddMatchForm extends Component {
   };
 
   _getPlayerNames = players => {
-    let playerNames = [];
-    if (players) {
-      Object.keys(players).map(player =>
-        playerNames.push(players[player].name)
-      );
-    }
-    return playerNames;
+    return Object.values(players).map(player => player.name);
   };
 
   addMatch = event => {
@@ -80,7 +74,6 @@ class AddMatchForm extends Component {
     });
 
     // Update Away Player
-
     const awayPlayerRef = root
       .child('players')
       .orderByChild('name')
@@ -104,20 +97,22 @@ class AddMatchForm extends Component {
   };
 
   componentDidMount() {
-    const root = fire.database().ref();
-    const playersRef = root.child('players').orderByChild('name');
-    playersRef.on('value', snapshot => {
-      const players = snapshot.val();
-      let playerNames = this._getPlayerNames(players);
-      this.setState({ playerNames: playerNames });
-    });
+    fire
+      .database()
+      .ref('players')
+      .orderByChild('name')
+      .on('value', snapshot => {
+        const players = snapshot.val();
+        const playerNames = this._getPlayerNames(players);
+        this.setState({ playerNames: playerNames });
+      });
   }
 
   render() {
     return (
       <form className={classes.AddMatchForm} onSubmit={this.addMatch}>
         <p>
-          <label for="homePlayerName">Player 1</label>
+          <label htmlFor="homePlayerName">Player 1</label>
           <select type="text" name="homePlayerName">
             {this.state.playerNames.map(name => (
               <option key={name} value={name}>
@@ -128,7 +123,7 @@ class AddMatchForm extends Component {
           <input type="text" name="homePlayerScore" placeholder="Score" />
         </p>
         <p>
-          <label for="awayPlayerName">Player 2</label>
+          <label htmlFor="awayPlayerName">Player 2</label>
           <select type="text" name="awayPlayerName">
             {this.state.playerNames.map(name => (
               <option key={name} value={name}>

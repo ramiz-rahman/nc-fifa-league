@@ -76,7 +76,7 @@ class App extends Component {
 
           {this.state.matches.map((match, i) => (
             <Match
-              key={i}
+              key={`${match.homePlayerName}-${match.awayPlayerName}`}
               homePlayerName={match.homePlayerName}
               homePlayerClub={
                 this.state.players.find(
@@ -97,6 +97,7 @@ class App extends Component {
           ))}
 
           <AddMatchForm />
+          <PlayerRegisterForm />
         </div>
       </div>
     );

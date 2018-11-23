@@ -3,7 +3,7 @@ import classes from './NavigationItems.module.css';
 
 const navigationItems = props => {
   return (
-    <ul class={classes.NavigationItems}>
+    <ul className={classes.NavigationItems}>
       <li>
         <a href="/">Standings</a>
       </li>
