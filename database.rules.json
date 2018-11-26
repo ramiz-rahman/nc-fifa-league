@@ -1,7 +1,7 @@
 {
   "rules": {
     ".read": true,
-    ".write": true,
+    ".write": "auth != null",
 
     "players": {
       "$id": {
@@ -11,6 +11,7 @@
 
     "matches": {
       "$id": {
+        ".write": "auth.uid == 'hGyZHld703YmV8EetNcuHHWmVzl2'",
         ".validate": "newData.hasChildren(['homePlayerName', 'awayPlayerName', 'homePlayerScore', 'awayPlayerScore', 'datetime']) && newData.child('homePlayerName').isString() && newData.child('awayPlayerName').isString() && newData.child('homePlayerScore').isNumber() && newData.child('homePlayerScore').isNumber() && newData.child('datetime').isNumber()"
       }
     }

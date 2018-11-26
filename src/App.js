@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import fire from './fire';
 import './App.css';
@@ -11,14 +11,39 @@ import AddMatchForm from './components/AddMatchForm/AddMatchForm';
 import Layout from './containers/Layout/Layout';
 import PastMatches from './containers/PastMatches/PastMatches';
 import UpcomingMatches from './containers/UpcomingMathces/UpcomingMatches';
+import SignIn from './components/Auth/SignIn/SignIn';
 
 class App extends Component {
   state = {
     players: [],
-    matches: []
+    matches: [],
+    currentUser: null
+  };
+
+  logIn = () => {};
+
+  logOutHandler = e => {
+    e.preventDefault();
+    fire
+      .auth()
+      .signOut()
+      .then(function() {
+        this.setState({ currentUser: null });
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
   };
 
   componentDidMount() {
+    fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ currentUser: user });
+      } else {
+        this.setState({ currentUser: null });
+      }
+    });
+
     const playersQuery = fire.database().ref('players');
     playersQuery.on('value', snapshot => {
       let players = Object.values(snapshot.val());
@@ -40,10 +65,24 @@ class App extends Component {
     });
   }
 
+  userIsRegistered = () => {
+    let registered = false;
+    if (this.state.currentUser) {
+      this.state.players.forEach(player => {
+        if (player.uid === this.state.currentUser.uid) registered = true;
+      });
+    }
+    return registered;
+  };
+
   render() {
     return (
       <BrowserRouter>
-        <Layout>
+        <Layout
+          authenticated={this.state.currentUser}
+          registered={this.userIsRegistered()}
+          logOut={this.logOutHandler}
+        >
           <Switch>
             <Route
               path="/"
@@ -68,8 +107,18 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/register" component={PlayerRegisterForm} />
+            <Route
+              path="/register"
+              render={() => {
+                return this.state.currentUser ? (
+                  <PlayerRegisterForm />
+                ) : (
+                  <Redirect to="/sign-in" />
+                );
+              }}
+            />
             <Route path="/add-match" component={AddMatchForm} />
+            <Route path="/sign-in" component={SignIn} />
           </Switch>
         </Layout>
       </BrowserRouter>

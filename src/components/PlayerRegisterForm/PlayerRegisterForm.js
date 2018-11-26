@@ -47,7 +47,9 @@ class PlayerRegisterForm extends Component {
         pts: 0,
         gf: 0,
         ga: 0,
-        gd: 0
+        gd: 0,
+        uid: fire.auth().currentUser.uid,
+        photoURL: fire.auth().currentUser.photoURL
       });
   };
 
@@ -69,13 +71,19 @@ class PlayerRegisterForm extends Component {
   }
 
   render() {
+    let defaultName = fire.auth().currentUser.displayName.split(' ')[0];
     return (
       <form
         className={classes.PlayerRegisterForm}
         onSubmit={this.registerPlayer}
       >
         <p>
-          <input type="text" name="name" placeholder="Your Name" />
+          <input
+            type="text"
+            name="name"
+            placeholder={defaultName}
+            defaultValue={defaultName}
+          />
           <select name="club">
             {this.state.clubs.map(club => (
               <option key={club} value={club}>

@@ -11,7 +11,11 @@ const toolbar = props => {
         <DrawerToggle onClick={props.toggleSideDrawer} />
         <Logo />
         <nav>
-          <NavigationItems />
+          <NavigationItems
+            authenticated={props.authenticated}
+            registered={props.registered}
+            logOut={props.logOut}
+          />
         </nav>
       </div>
     </header>

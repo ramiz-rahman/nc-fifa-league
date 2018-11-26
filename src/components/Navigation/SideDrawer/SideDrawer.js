@@ -12,7 +12,11 @@ const sideDrawer = props => {
       <div className={attachedClasses}>
         <div onClick={props.closeSideDrawer} />
         <nav>
-          <NavigationItems />
+          <NavigationItems
+            authenticated={props.authenticated}
+            registered={props.registered}
+            logOut={props.logOut}
+          />
         </nav>
       </div>
     </div>

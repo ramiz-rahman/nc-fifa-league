@@ -9,6 +9,7 @@
 }
 
 .NavigationItems li a {
+  color: #333;
   font-size: 0.8rem;
   text-transform: uppercase;
   text-decoration: none;
@@ -20,4 +21,14 @@
 
 .NavigationItems li a:hover {
   color: red;
+}
+
+.Auth {
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+.Active {
+  border-bottom: 2px solid #333;
 }

@@ -21,10 +21,18 @@ class Layout extends Component {
   render() {
     return (
       <div className={classes.Layout}>
-        <Toolbar toggleSideDrawer={this.sideDrawerToggleHandler} />
+        <Toolbar
+          toggleSideDrawer={this.sideDrawerToggleHandler}
+          authenticated={this.props.authenticated}
+          registered={this.props.registered}
+          logOut={this.props.logOut}
+        />
         <SideDrawer
           opened={this.state.showSideDrawer}
           closeSideDrawer={this.sideDrawerCloseHandler}
+          authenticated={this.props.authenticated}
+          registered={this.props.registered}
+          logOut={this.props.logOut}
         />
         <div>{this.props.children}</div>
       </div>
