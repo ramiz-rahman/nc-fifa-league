@@ -33,6 +33,8 @@ class AddMatchForm extends Component {
   };
 
   addMatch = event => {
+    event.preventDefault();
+
     const matchData = new FormData(event.target);
 
     const root = fire.database().ref();
@@ -94,6 +96,9 @@ class AddMatchForm extends Component {
         .ref(`players/${playerID}`)
         .update(updatedStats);
     });
+
+    // Redirect to Standings Table
+    this.props.history.push('/');
   };
 
   componentDidMount() {

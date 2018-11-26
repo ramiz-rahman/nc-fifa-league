@@ -33,6 +33,7 @@ class PlayerRegisterForm extends Component {
   };
 
   registerPlayer = e => {
+    e.preventDefault();
     const player = new FormData(e.target);
     fire
       .database()
@@ -51,6 +52,9 @@ class PlayerRegisterForm extends Component {
         uid: fire.auth().currentUser.uid,
         photoURL: fire.auth().currentUser.photoURL
       });
+
+    // Redirect to Standings Table
+    this.props.history.push('/');
   };
 
   componentDidMount() {
