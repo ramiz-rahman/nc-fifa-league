@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './AddMatchForm.module.css';
 import fire from '../../fire';
+import SubmitButton from '../UI/SubmitButton/SubmitButton';
 
 class AddMatchForm extends Component {
   state = {
@@ -125,7 +126,12 @@ class AddMatchForm extends Component {
               </option>
             ))}
           </select>
-          <input type="text" name="homePlayerScore" placeholder="Score" />
+          <input
+            type="text"
+            name="homePlayerScore"
+            placeholder="Score"
+            required
+          />
         </p>
         <p>
           <label htmlFor="awayPlayerName">Player 2</label>
@@ -136,10 +142,15 @@ class AddMatchForm extends Component {
               </option>
             ))}
           </select>
-          <input type="text" name="awayPlayerScore" placeholder="Score" />
+          <input
+            type="text"
+            name="awayPlayerScore"
+            placeholder="Score"
+            required
+          />
         </p>
         <p>
-          <input type="submit" />
+          <SubmitButton>Submit</SubmitButton>
         </p>
       </form>
     );

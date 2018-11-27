@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './PlayerRegisterForm.module.css';
 import fire from '../../fire';
+import SubmitButton from '../UI/SubmitButton/SubmitButton';
 
 class PlayerRegisterForm extends Component {
   state = {
@@ -95,7 +96,7 @@ class PlayerRegisterForm extends Component {
               </option>
             ))}
           </select>
-          <input type="submit" />
+          <SubmitButton>Submit</SubmitButton>
         </p>
       </form>
     );

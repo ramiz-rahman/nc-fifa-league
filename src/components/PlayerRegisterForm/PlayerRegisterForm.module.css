@@ -22,8 +22,7 @@
 }
 
 .PlayerRegisterForm input,
-.PlayerRegisterForm select,
-.PlayerRegisterForm input[type='submit'] {
+.PlayerRegisterForm select {
   box-sizing: border-box;
   margin: 10px;
   padding: 20px;
@@ -34,8 +33,4 @@
   height: 80px;
   text-align: center;
   font-size: 1rem;
-}
-
-.PlayerRegisterForm input[type='submit'] {
-  font-weight: 700;
 }

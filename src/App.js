@@ -107,16 +107,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route
-              path="/register"
-              render={() => {
-                return this.state.currentUser ? (
-                  <PlayerRegisterForm />
-                ) : (
-                  <Redirect to="/sign-in" />
-                );
-              }}
-            />
+            <Route path="/register" component={PlayerRegisterForm} />
             <Route path="/add-match" component={AddMatchForm} />
             <Route path="/sign-in" component={SignIn} />
           </Switch>

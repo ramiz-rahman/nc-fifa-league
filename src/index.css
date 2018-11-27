@@ -131,6 +131,21 @@ table {
   border-spacing: 0;
 }
 
+/* STYLE GUIDE */
+/*
+
+TEXT-COLOR: #333
+BORDER-COLOR: #ddd
+BOX-SHADOW: rgb(187, 187, 187, 0.75)
+NC-DARK-TEAL: #3D9CA0
+NC-LIGHT-TEAL: #2ED3D4
+NC-DARK-RED: #B51826
+NC-LIGHT-RED: #E72133
+
+
+
+*/
+
 html {
   font-size: 20px;
 }

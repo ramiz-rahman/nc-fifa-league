@@ -34,7 +34,11 @@ const match = props => {
           <strong>{props.number}</strong>
         </p>
         <p>
-          <time>{moment(props.datetime).calendar()}</time>
+          {props.datetime != null ? (
+            <time>{moment(props.datetime).calendar()}</time>
+          ) : (
+            'Scheduled'
+          )}
         </p>
       </div>
     </div>

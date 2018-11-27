@@ -20,15 +20,26 @@
 }
 
 .NavigationItems li a:hover {
-  color: red;
+  color: #e72133;
 }
 
-.Auth {
-  background-color: red;
-  padding: 10px;
+.NavigationItems .Auth {
+  background-color: #2ed3d4;
+  box-shadow: 0 2px 5px 2px #ddd;
+  padding: 5px 10px;
   border-radius: 5px;
   color: white;
 }
+
+.NavigationItems .Auth a:visited {
+  color: white;
+}
+
+.NavigationItems .Auth:hover {
+  box-shadow: 0 0 0 0;
+  background-color: #3d9ca0;
+}
+
 .Active {
   border-bottom: 2px solid #333;
 }

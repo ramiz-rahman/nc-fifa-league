@@ -1,0 +1,22 @@
+.SubmitButton {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  background-color: #e72133;
+  box-shadow: -2px 2px 5px 5px rgba(187, 187, 187, 0.75);
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 20px;
+  width: 150px;
+  height: 80px;
+}
+
+.SubmitButton:hover {
+  box-shadow: 0 0 0 0;
+  background-color: #b51826;
+}

@@ -5,10 +5,8 @@ import ADMINS from '../../../Admins';
 
 const navigationItems = props => {
   let signedInOnly = [
-    <li key="Sign Out" onClick={props.logOut}>
-      <NavLink to="/" className={classes.Auth}>
-        Sign Out
-      </NavLink>
+    <li key="Sign Out" onClick={props.logOut} className={classes.Auth}>
+      <NavLink to="/">Sign Out</NavLink>
     </li>
   ];
   if (props.authenticated && ADMINS.includes(props.authenticated.email)) {
@@ -50,10 +48,8 @@ const navigationItems = props => {
       {props.authenticated ? (
         signedInOnly
       ) : (
-        <li>
-          <NavLink to="/sign-in" className={classes.Auth}>
-            Sign In
-          </NavLink>
+        <li className={classes.Auth}>
+          <NavLink to="/sign-in">Sign In</NavLink>
         </li>
       )}
     </ul>
